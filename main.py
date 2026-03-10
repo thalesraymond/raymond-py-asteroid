@@ -8,7 +8,7 @@ from logger import log_state
 from player import Player
 from logger import log_event
 from shot import Shot
-
+from ui import draw_ui
 
 
 def main():
@@ -55,17 +55,22 @@ def main():
                     log_event("asteroid_shot")
                     asteroid.split()
                     shot.kill()
+                    player.increase_score(10)
                     continue
 
             if asteroid.collide(player):
                 log_event("player_hit")
-                print("Game over!")
-                sys.exit()
+                player.lives -= 1
+                asteroid.kill()
+                if player.lives <= 0:
+                    print("Game over!")
+                    sys.exit()
 
 
         for draw_item in drawable:
             draw_item.draw(screen)
 
+        draw_ui(screen, player)
 
         pygame.display.flip()
 
