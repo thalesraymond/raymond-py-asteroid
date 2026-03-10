@@ -46,6 +46,8 @@ def main():
         print(dt)
 
         screen.fill("black")
+        backgroud = pygame.image.load("background.jpg")
+        screen.blit(backgroud, (0, 0))
 
         updatable.update(dt)
 
